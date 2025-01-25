@@ -1,0 +1,77 @@
+{% extends 'Vendor/header_footer.html' %}
+{% load static %}
+{% block title %}
+Report
+{% endblock title %}
+{% block report %}active{% endblock report %}
+{% block body %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+                    <h3>Store Table</h3>
+                    <p class="breadcrumbs"><span><a href="/Vendor/index/">Home</a></span>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Report (By Vendor)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header">Datatable</div>
+                <div class="card-body">
+                    <form method="post" action="/Vendor/report2/">
+                        {% csrf_token %}
+                        <div class="col-lg-6">
+                            <div class="form-group mt-2 d-flex flex-column">
+                                <label class="form-label"> Select Store: </label>
+                                <select name="StoreId" class="form-selected form-control">
+                                    {% for i in store %}
+                                        <option value={{i.StoreId}} class="dummy" name="StoreId">
+                                            {{i.StoreName}}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-end mb-20">
+                            <button class="btn btn-primary me-1 mb-1">Generate Report</button>
+                        </div>
+                    </form>
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th>Order id</th>
+                            <th>Order Date</th>
+                            <th>User Address</th>
+                            <th>Order Amount</th>
+                            <th>User Name</th>
+                            <th>Store Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in order %}
+                                <tr>
+                                    <td>{{data.OrderId}}</td>
+                                    <td>{{data.OrderDate}}</td>
+                                    <td>{{data.UserId.Address}}</td>
+                                    <td> &#8377; {{data.Amount}}</td>
+                                    <td>{{data.UserId.UserName}}</td>
+                                    <td>{{data.StoreId.StoreName}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<style>
+    .mb-20{
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}

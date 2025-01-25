@@ -1,0 +1,56 @@
+{% comment %} {% extends 'Admin/header_footer.html' %} {% endcomment %}
+{% load static %}
+{% block title %}
+Report
+{% endblock title %}
+{% block report %}active{% endblock report %}
+{% block body %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+                    <h3>Store Table</h3>
+                    <p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Report (By Date)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="/Admin/pdf/">pdf </a>
+        <section class="section">
+            <div class="card">
+                <div class="card-header">Datatable</div>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Order id</th>
+                                <th>Order Date</th>
+                                <th>User Address</th>
+                                <th>Order Amount</th>
+                                <th>User Name</th>
+                                <th>Store Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in order %}
+                                <tr>
+                                    <td>{{data.OrderId}}</td>
+                                    <td>{{data.OrderDate}}</td>
+                                    <td>{{data.UserId.Address}}</td>
+                                    <td>&#8377; {{data.Amount}}</td>
+                                    <td>{{data.UserId.UserName}}</td>
+                                    <td>{{data.StoreId.StoreName}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} State {% endblock %}
+{% block Others %} active {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">	
+				<div>
+					<h1>State</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>State</p>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#modal-add-contact"> Add New State
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-lg-4" hidden>
+					<div class="ec-cat-list card card-default mb-24px">
+						<div class="card-body">
+							<div class="ec-cat-form">
+								<h4>Add New State</h4>
+								<form method="post">
+									<div class="form-group row">
+										<label for="text" class="col-12 col-form-label">State Id</label> 
+										<div class="col-12">
+											<input id="text" name="text" class="form-control here slug-title" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="slug" class="col-12 col-form-label">State Name</label> 
+										<div class="col-12">
+											<input id="slug" name="slug" class="form-control here set-slug" type="text">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-12 col-lg-12">
+					<div class="ec-cat-list card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table">
+									<thead>
+										<tr>
+											<th>State Id</th>
+											<th>State Name</th>
+											<th>Action</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										{% for ars in st%}
+											<tr>
+												<td>{{ars.StateId}}</td>
+												<td>{{ars.StateName}}</td>
+												<td><a href='/Admin/d_state/{{ars.StateId}}'>Delete |</a>&nbsp;
+													<a href="/Admin/u_state/{{ars.StateId}}">Update</a></td>
+											</tr>  
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade modal-add-contact" id="modal-add-contact" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="ec-cat-list card card-default mb-24px">
+							<div class="card-body">
+								<div class="ec-cat-form">
+									<h4>Add New State</h4>
+									<form method="post" action="/Admin/i_state/">
+										{% csrf_token %}
+										<div class="form-group row">
+											<label for="slug" class="col-12 col-form-label">State Name</label> 
+											<div class="col-12">
+												<input id="slug" name="StateName" class="form-control here set-slug" type="Add New State">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

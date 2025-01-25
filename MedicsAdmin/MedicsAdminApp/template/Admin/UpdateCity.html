@@ -1,0 +1,43 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Update City {% endblock %}
+{% block body %}
+<div class="ec-cat-list card card-default mb-24px">
+    <div class="card-body">
+        <div class="ec-cat-form">
+            <h4>Update City</h4>
+            <form method="post" action="/Admin/u_city/{{city.CityId}}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="text" class="col-12 col-form-label">City Id</label> 
+                    <div class="col-12">
+                        <input id="CityId" name="CityId" class="form-control here slug-title" type="Add Area Id" disabled value="{{city.CityId}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">City Name</label> 
+                    <div class="col-12">
+                        <input id="CityName" name="CityName" class="form-control here set-slug" type="Add New Area">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">State Name</label> 
+                    <div class="col-12">
+                        <select name="StateId">
+                            <option>Select State</option>
+                            {% for aras in st %}
+                                <option value="{{aras.StateId}}">{{aras.StateName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

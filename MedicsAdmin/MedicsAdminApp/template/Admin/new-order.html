@@ -1,0 +1,57 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} New order {% endblock %}
+{% block Orders %} active {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+				<h1>New Orders</h1>
+				<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Orders
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table" style="width:100%">
+									<thead>
+										<tr>
+											<th>Number</th>
+											<th>Name</th>
+											<th>Product</th>
+											<th>OrderDate</th>
+											<th>Order Status</th>
+											<th>Payment</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for orders in order %}
+											<tr>
+												<td>{{orders.OrderId}}</td>
+												<td>{{orders.UserId}}</td>
+												<td>{{orders.ProductId}}</td>
+												<td>{{orders.OrderDate}}</td>
+												<td>{{orders.OrderStatusId}}</td>
+												<td>{{orders.PaymentId}}</td>
+												<td><a href='#'>Delete &nbsp; |</a>&nbsp;
+													<a href="#">Update</a>
+												</td>   
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Update Sub Category {% endblock %}
+{% block body %}
+<div class="ec-cat-list card card-default mb-24px">
+    <div class="card-body">
+        <div class="ec-cat-form">
+            <h4>Update Sub Category</h4>
+            <form method="post" action="/Admin/u_scat/{{scat.SubCatId}}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="text" class="col-12 col-form-label"> Sub Category Id</label> 
+                    <div class="col-12">
+                        <input id="text" name="SubCatId" value="{{scat.SubCatId}}" class="form-control here slug-title" type="text" disabled >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">Sub Category Name</label> 
+                    <div class="col-12">
+                        <input id="SubCatName" name="SubCatName" class="form-control here set-slug" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">Category Name</label> 
+                    <div class="col-12">
+                        <select name="CatId">
+                            <option>Select Category</option>
+                            {% for aras in cat %}
+                                <option value="{{aras.CatId}}">{{aras.CatName}}</option>
+                            {% endfor %}                            
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

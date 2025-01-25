@@ -1,0 +1,56 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Order History {% endblock %}
+{% block Orders %} active {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+				<h1>Orders History</h1>
+				<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>History
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table" style="width:100%">
+									<thead>
+										<tr>
+											<th>Order-ID</th>
+											<th>Customer</th>
+											<th>Email</th>
+											<th>Price</th>
+											<th>Payment</th>
+											<th>Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for i in pay %}
+											<tr>
+												<td><a href="/Admin/orderDetail/{{i.OrderId.OrderId}}">{{i.OrderId.OrderId}}</td>
+												<td><a href="/Admin/userProfile/{{i.OrderId.UserId.UserId}}">{{i.OrderId.UserId.UserName}}</a></td>
+												<td>{{i.OrderId.UserId.Email}}</td>
+												<td>&#8377;{{i.PaymentAmount}}</td>
+												<td>{{i.PaymentStatusId.PaymentStatus}}</td> 
+												<td>{{i.OrderId.OrderDate}}</td>
+												<td>
+													<a href="/Admin/orderDetail/{{i.OrderId.OrderId}}">Detail</a>
+												</td>
+											</tr>
+										{%endfor%}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

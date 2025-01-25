@@ -1,0 +1,257 @@
+{% extends 'shop/header.html' %}
+{% load static %}
+{% block title %} Product Details {% endblock %}
+{% block body %}
+{%load cart_tag%}
+    <!-- SHOP DETAILS AREA START -->
+    <div class="ltn__shop-details-area pb-85 mt-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    {% for product in product%}
+                    <div class="ltn__shop-details-inner mb-60">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ltn__shop-details-img-gallery">
+                                    <div class="ltn__shop-details-large-img">
+                                        <div class="single-large-img">
+                                            <a href="img/product/1.png' %}" data-rel="lightcase:myCollection">
+                                                <img src="{{product.ProductImage.url}}" alt="Image">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modal-product-info shop-details-info pl-0">
+                                    <h3>{{product.ProductName}}</h3>
+                                    <div class="product-price">
+                                        <span>&#8377; {{product.ProductPrice}}</span>
+                                        <del>&#8377; {{product.MRP}}</del>
+                                    </div>
+                                    <div class="ltn__product-details-menu-2">
+                                        <ul>
+                                            <li>
+                                                {% comment %} <div class="cart-plus-minus">
+                                                    {% if product.quantity == 1 %}
+                                                    <a class="quan-minus custom-css"  href="#" >-</a>
+                                                    {% else %}  
+                                                    <a href="/cart/item_decrement/{{product.product_id}}"  class="custom-css">-</a>
+                                                    {% endif %}
+                                                    <input type="text" value="{{product.quantity}}" name="qtybutton" class="cart-plus-minus-box">
+                                                    <a href="/cart/item_increment/{{product.product_id}}"  class="custom-css">+</a>
+                                                </div> {% endcomment %}
+                                                {% comment %} <div class="cart-plus-minus">
+                                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                </div> {% endcomment %}
+                                            </li>
+                                            <li>
+                                                <a href="/cart/add/{{product.ProductId}}" class="theme-btn-1 btn btn-effect-1" title="Add to Cart">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    <span>ADD TO CART</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    {% comment %} <div class="ltn__product-details-menu-3">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                    <i class="far fa-heart"></i>
+                                                    <span>Add to Wishlist</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <hr> {% endcomment %}
+                                    <hr>
+                                    <div class="ltn__safe-checkout">
+                                        <h5>Guaranteed Safe Checkout</h5>
+                                        <img src="{% static 'img/icons/payment-2.png' %}" alt="Payment Image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Shop Tab Start -->
+                    <div class="ltn__shop-details-tab-inner ltn__shop-details-tab-inner-2">
+                        <div class="ltn__shop-details-tab-menu">
+                            <div class="nav">
+                                <a class="active show" data-bs-toggle="tab" href="#liton_tab_details_1_1">Description</a>
+                                <a data-bs-toggle="tab" href="#liton_tab_details_1_2" class="">Reviews</a>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="liton_tab_details_1_1">
+                                <div class="ltn__shop-details-tab-content-inner">
+                                    <h4 class="title-2">Description</h4>
+                                    <p>{{product.Description}}</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="liton_tab_details_1_2">
+                                <div class="ltn__shop-details-tab-content-inner">
+                                    <h4 class="title-2">Customer Reviews</h4>
+                                    <div class="product-ratting">
+                                        <ul>
+                                            {% comment %} <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                            <li><a href="#"><i class="far fa-star"></i></a></li> {% endcomment %}
+                                            <li class="review-total"> <a href="#">Total Reviews {{feedbacks.count}}</a></li>
+                                        </ul>
+                                    </div>
+                                    {%endfor%}
+                                    <hr>
+                                    <!-- comment-area -->
+                                    <div class="ltn__comment-area mb-30">
+                                        {%for i in feedbacks%}
+                                        <div class="ltn__comment-inner">
+                                            <ul>
+                                                <li>
+                                                    <div class="ltn__comment-item clearfix">
+                                                        <div class="ltn__commenter-img">
+                                                            <img src="{{i.UserId.UserProfile.url}}" alt="Image">
+                                                        </div>
+                                                        <div class="ltn__commenter-comment">
+                                                            <h6><a href="#">{{i.UserId.UserName}}</a></h6>
+                                                            <div class="product-ratting">
+                                                                <ul>
+                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <p>{{i.FeedBackDesc}}</p>
+                                                            <span class="ltn__comment-reply-btn">{{i.FeedBackDate}}</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                    <!-- comment-reply -->
+                                    <div class="ltn__comment-reply-area ltn__form-box mb-30">
+                                        <form action="/addFeedback/{{product.ProductId}}" method="post">
+                                            {%csrf_token%}
+                                            <h4 class="title-2">Add a Review</h4>
+                                            <div class="mb-30">
+                                                <div class="add-a-review">
+                                                    <h6>Your Ratings:</h6>
+                                                    <div class="product-ratting">
+                                                        <ul>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                            <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-item input-item-textarea ltn__custom-icon">
+                                                <textarea placeholder="Type your comments...." name="FeedBackDesc"></textarea>
+                                            </div>
+                                            <div class="input-item input-item-name ltn__custom-icon">
+                                                <input type="text"  name="UserId" value="{{user.UserId}}">
+                                            </div>
+                                            <div class="input-item input-item-website ltn__custom-icon">
+                                                <input type="text" name="website" placeholder="Type your name...." name="UserName" value="{{user.UserName}}">
+                                            </div>
+                                            <div class="input-item input-item-email ltn__custom-icon">
+                                                <input type="email" placeholder="Type your email...." name="Email" value={{user.Email}}>
+                                            </div>
+                                            
+                                            <label class="mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label>
+                                            <div class="btn-wrapper">
+                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shop Tab End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SHOP DETAILS AREA END -->
+
+    <!-- PRODUCT SLIDER AREA START -->
+    {% comment %} <div class="ltn__product-slider-area ltn__product-gutter pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h4 class="title-2">Related Products<span>.</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__related-product-slider-one-active slick-arrow-1">
+                <!-- ltn__product-item -->
+                <div class="col-lg-12">
+
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <div class="product-img">
+                            <a href="product-details.html"><img src="{% static 'img/product/7.png' %}" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge">New</li>
+                                </ul>
+                            </div>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="far fa-heart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-ratting">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                            <h2 class="product-title"><a href="product-details.html">Digital Stethoscope</a></h2>
+                            <div class="product-price">
+                                <span>$149.00</span>
+                                <del>$162.00</del>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <!-- PRODUCT SLIDER AREA END -->
+    <style>
+        .single-large-img.slick-slide.slick-current.slick-active img {
+            width: 100%;
+        }
+        .single-large-img.slick-slide.slick-current.slick-active {
+            width: 500px !important;
+        }
+    </style>
+{% endblock %}

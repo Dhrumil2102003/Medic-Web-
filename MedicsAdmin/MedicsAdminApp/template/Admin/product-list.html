@@ -1,0 +1,59 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Product List {% endblock %}
+{% block Products %}active{% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+				<div>
+					<h1>Product</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+						<span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table"
+									style="width:100%">
+									<thead>
+										<tr>
+											<th>Product Image</th>
+											<th>Product Id</th>
+											<th>Product Name</th>
+											<th>Price</th>
+											<th>Stock</th>
+											<th>Sub Category Name</th>
+											<th>Sub Sub Category Name</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										{% for product in product %}
+										<tr>
+											<td><img src='{{product.ProductImage.url}}' style="width:70px;"></td>
+											<td>{{product.ProductId}}</td>
+											<td><a class="username-hover" href="/Admin/productDetail/{{product.ProductId}}">{{product.ProductName}}</a></td>
+											<td>&#8377;{{product.ProductPrice}}</td>
+											<td>{{product.ProductQty}}</td>
+											<td>{{product.SubCatId.SubCatName}}</td>
+											<td>{{product.SubSubCatId.SubSubCatName}}</td>
+											<td><a href='/Admin/d_pro/{{product.ProductId}}'>Delete</a></td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

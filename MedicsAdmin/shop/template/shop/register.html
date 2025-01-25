@@ -1,0 +1,230 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+{% load static %}
+<!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Feb 2023 06:18:48 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Place favicon.png in the root directory -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <style>
+        .bg-img{
+            background-repeat: no-repeat; 
+            background-size: cover;
+            background-image:url("{% static 'img/bg/25.jpg' %}");
+            width: 98%;
+        }
+        .btn-flex{
+            display: flex;
+            margin-top: 30px;
+            justify-content: space-evenly;
+
+        }
+        .btn-padding{
+            padding:20px !important ; 
+        }
+        input[type="text"],input[type="tel"],input[type="date"], input[type="email"], input[type="password"], input[type="submit"], textarea {
+            background-color: var(--white);
+            border: 2px solid;
+            border-color: var(--border-color-9);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            padding-left: 20px;
+            font-size: 16px;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 30px;
+            border-radius: 0px;
+            padding-right: 40px;
+            margin-top: 10px;
+        }
+        
+        .btn {
+            width: 30%;
+            height: 75%;
+            background-color: #3b71ca;
+            border-radius: 10px; 
+            padding-left: 0.736px;
+            padding-right: 0.736px;
+            padding-top: 0.736rem;
+            padding-bottom: 0.736rem;
+            text-align: center;
+            font-size: 24px;
+            line-height: 1.6;
+            margin-right: 0px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 9px -4px rgb(59 113 202 / 30%), 0 4px 18px 0 rgb(59 113 202 / 20%);
+        }
+        .margin-top{
+            margin-top: 55px;
+        }
+        .padding{
+            padding-left:0;
+        }
+    </style>
+</head>
+
+    <body class="sign-up" id="body">
+
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-xl-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-12 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                    <form class="mx-1 mx-md-4" method="post" action="/register/" enctype="multipart/form-data" data-parsley-validate>
+                                        {% csrf_token %}                                        
+                                        <div class="row mb-2">
+                                            <div class="form-group mb-6">
+                                                <label for="UserProfile" class="form-label">User Image</label>
+                                                <div class="padding col-sm-8 col-lg-10 mt-10 mb-30">
+                                                    <div class="custom-file mb-1">
+                                                        <input type="file" class="form-control" id="UserProfile" name="UserProfile" required>
+                                                        <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="UserName">Username</label>
+                                                    <input type="text" id="userName" name="UserName" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="firstName" data-parsley-required="true"
+                                                    data-parsley-required-message="First name is required">First Name</label>
+                                                    <input type="text" id="FirstName" name="FirstName" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="lasttName">Last Name</label>
+                                                    <input type="text" id="lasstName" name="LastName" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="mobile">Mobile No.</label>
+                                                    <input type="tel" id="mobile" name="Mobile" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="email">Your Email</label>
+                                                    <input type="email" id="Email" name="Email" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="email">Address</label>
+                                                    <input type="text" id="address" name="Address" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="Password">Password</label>
+                                                    <input type="password" id="Password" name="Password" class="form-control" />
+                                                </div>
+                                            </div>
+                            
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                                                    <input type="password" id="confirmPassword" name="ConfirmPassword" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-4">
+                                                    <label class="form-label" for="confirmPassword">Date Of Birth</label>
+                                                    <input type="date" id="dob" name="DOB" class="form-control" />
+                                                </div>
+                                            </div>
+                        
+                                            <div class="col-lg-6">
+                                                <div class="form-group mt-2 d-flex flex-column">
+                                                    <label class="form-label" for="gender">Gender</label>
+                                                    <select name="Gender" id="Gender">
+                                                        <option value="male" id="male">Male</option>
+                                                        <option value="female" id="female">Female</option>
+                                                        <option value="others" id="others">Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                        
+                                            <div class="col-lg-6">
+                                                <div class="form-group mt-2 d-flex flex-column">
+                                                    <label class="form-label" for="Area">Area</label>
+                                                    <select name="AreaId" id="AreaId">
+                                                        <option> Select Option </option>
+                                                        {%for area in ar %}
+                                                            <option value="{{area.AreaId}}" id="AreaId" name="AreaId">{{area.AreaName}}</option>
+                                                        {%endfor%}
+                                                    </select>
+                                                </div>
+                                            </div>
+                        
+                                            {% comment %} <div class="col-lg-6">
+                                                <div class="form-group mt-2 d-flex flex-column">
+                                                    <label class="form-label" for="City">City</label>
+                                                    <select name="City" id="City">
+                                                            <option value="male" id="male">Male</option>
+                                                            <option value="female" id="female">Female</option>
+                                                            <option value="others" id="others">Others</option>
+                                                    </select>
+                                                </div>
+                                            </div> {% endcomment %}
+                    
+                                            <div class="d-flex justify-content-center mx-4 margin-top mb-3 mb-lg-4">
+                                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                                                {% comment %} <button type="button" class="btn btn-primary">Reset</button> {% endcomment %}
+                                            </div>
+                                            <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login/"
+                                                class="fw-bold text-body"><u>Login here</u></a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} </div> {% endcomment %}
+        <!-- Body main wrapper end -->
+
+        <!-- All JS Plugins -->
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <!-- Main JS -->
+        <script src="{% static 'js/main.js' %}"></script>
+  
+    </body>
+
+<!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Feb 2023 06:18:48 GMT -->
+</html>
+

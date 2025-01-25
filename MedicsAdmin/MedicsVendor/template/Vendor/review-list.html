@@ -1,0 +1,68 @@
+{% extends 'Vendor/header_footer.html' %}
+{% load static %}
+{% block title %} Product List {% endblock %}
+{% block Reviews %}active{% endblock %}
+{% block body %}
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div
+						class="breadcrumb-wrapper breadcrumb-wrapper-2 d-flex align-items-center justify-content-between">
+						<h1>FeedBacks</h1>
+						<p class="breadcrumbs"><span><a href="/Vendor/index/">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>FeedBacks
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="responsive-data-table" class="table" style="width:100%">
+											<thead>
+												<tr>
+													<th>FeedBackId</th>
+													<th>Name</th>
+													<th>Date</th>
+													<th>Rating</th>
+													<th>UserEmail</th>
+													{% comment %} <th>Date</th> {% endcomment %}
+													<th>Action</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												{% for i in feedback %}
+												<tr>
+													{% comment %} <td><img class="tbl-thumb" src="{% static 'assets/img/products/p10.jpg' %}" alt="product image"/></td> {% endcomment %}
+													<td>{{i.FeedBackId}}</td>
+													<td>{{i.UserId.UserName}}</td>
+													<td>{{i.FeedBackDate}}</td>
+													<td>
+														<div class="ec-t-rate">
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star"></i>
+														</div>
+													</td>
+													<td>{{i.UserId.Email}}</td>
+													<td>
+															<a href="#">Delete</a>
+													</td>
+												</tr>
+												{%endfor%}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<!-- End Content -->
+			</div> 
+			<!-- End Content Wrapper -->
+{% endblock %} 

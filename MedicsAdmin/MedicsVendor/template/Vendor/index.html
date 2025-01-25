@@ -1,0 +1,102 @@
+	{% extends 'Vendor/header_footer.html' %}
+	{% load static %}
+	{% block title %} Medics - Home Page {% endblock %}
+	{% block index %} active {% endblock %}
+	{% block body %}
+	<header class="ec-main-header" id="header">
+		<nav class="navbar navbar-static-top navbar-expand-lg">
+			<!-- Sidebar toggle button -->
+			<button id="sidebar-toggler" class="sidebar-toggle"></button>
+			<!-- navbar right -->
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+					<!-- User Account -->
+					<li class="dropdown user-menu">
+						<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown"
+							aria-expanded="true">
+							<img src="{{ad.Profile.url}}" class="user-image" alt="User Image" />
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
+							<!-- User image -->
+							<li class="dropdown-header">
+								<img src="{{ad.Profile.url}}" class="img-circle" alt="User Image" />
+							 <div class="d-inline-block">
+									{{ad.Name}} <small class="pt-1">{{ad.Email}}</small>
+								</div> 
+							</li>
+							<li>
+								<a href="/Vendor/userProfile/">
+									<i class="mdi mdi-account"></i> My Profile
+								</a>
+							</li>
+							<li class="dropdown-footer">
+								<a href="/Vendor/logout/"> <i class="mdi mdi-logout"></i> Log Out </a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="content">
+			<!-- Top Statistics -->
+			<div class="row">
+				<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+					<div class="card card-mini dash-card card-1">
+						<div class="card-body">
+							<h2 class="mb-1">{{store}}</h2>
+							<p>Total Stores</p>
+							<span class="mdi mdi-account-arrow-left"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+					<div class="card card-mini dash-card card-2">
+						<div class="card-body">
+							<h2 class="mb-1">{{user}}</h2>
+							<p>Total Customers</p>
+							<span class="mdi mdi-account-clock"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+					<div class="card card-mini dash-card card-3">
+						<div class="card-body">
+							<h2 class="mb-1">{{product}}</h2>
+							<p>Total Products</p>
+							<span class="mdi mdi-package-variant"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+					<div class="card card-mini dash-card card-4">
+						<div class="card-body">
+							<h2 class="mb-1">{{cat}}</h2>
+							<p>Total Categories</p>
+							<span class="mdi mdi-package"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div> <!-- End Content -->
+	</div> <!-- End Content Wrapper -->
+
+	<style>
+		.navbar .navbar-right .navbar-nav .user-menu .user-image {
+			width: 50px;
+			border-radius: 15px;
+			height: 50px;
+		}
+		.navbar .dropdown-menu li.dropdown-header img {
+			width: 50px;
+			vertical-align: top;
+			border-radius: 15px;
+			height: 50px;
+			margin-right: 0.63rem;
+		}
+	</style>
+{% endblock %}

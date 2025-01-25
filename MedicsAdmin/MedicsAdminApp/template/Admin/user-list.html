@@ -1,0 +1,69 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} User List {% endblock %}
+{% block User %}active{% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-contacts">
+				<div>
+					<h1>User List</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+						<span><i class="mdi mdi-chevron-right"></i></span>Users
+						<span><i class="mdi mdi-chevron-right"></i></span>All User
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="ec-vendor-list card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table">
+									<thead>
+										<tr>
+											<th>User Id</th>
+											<th>User Name</th>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Mobile</th>
+											<th>Area</th>
+											<th>Role</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										{% for users in user %}
+										<tr>
+											<td>{{users.UserId}}</td>
+											<td><a class="username-hover" href="/Admin/userProfile/{{users.UserId}}">{{users.UserName}}</a></td>
+											<td>{{users.FirstName}} {{users.LastName}}</td>
+											<td>{{users.Email}}</td>
+											<td>{{users.Mobile}}</td>
+											<td>{{users.AreaId.AreaName}}</td>
+											<td>{{users.RoleId.RoleName}}</td>
+											<td><a href='#'>Delete</a></td>	
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+	<style>
+		a.username-hover {
+			color: #8a909d;
+		}
+		a.username-hover:hover{
+			color: rgb(136, 170, 243);
+		}
+	</style>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Update User {% endblock %}
+{% block body %}
+<div class="ec-cat-list card card-default mb-24px">
+    <div class="card-body">
+        <div class="ec-cat-form">
+            <h4>Update User</h4>
+            <form>
+                <div class="form-group row">
+                    <label for="text" class="col-12 col-form-label">User Id</label> 
+                    <div class="col-12">
+                        <input id="text" name="text" class="form-control here slug-title" type="User Id" disabled value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">User Name</label> 
+                    <div class="col-12">
+                        <input id="slug" name="slug" class="form-control here set-slug" type="User Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">First Name</label> 
+                    <div class="col-12">
+                        <input id="text" name="text" class="form-control here slug-title" type="First Name">
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">Last Name</label> 
+                    <div class="col-12">
+                        <input id="text" name="text" class="form-control here slug-title" type="Last Name">
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">Email Id</label> 
+                    <div class="col-12">
+                        <input id="text" name="text" class="form-control here slug-title" type="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">Mobile Number</label> 
+                    <div class="col-12">
+                        <input id="text" name="text" class="form-control here slug-title" type="tel">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-12 col-form-label">Address</label> 
+                    <div class="col-12">
+                        <textarea id="Address" name="Address" cols="40" rows="4" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>  
+</div>
+{% endblock %}

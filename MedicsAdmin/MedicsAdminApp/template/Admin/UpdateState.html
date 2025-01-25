@@ -1,0 +1,32 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Update State {% endblock %}
+{% block body %}
+<div class="ec-cat-list card card-default mb-24px">
+    <div class="card-body">
+        <div class="ec-cat-form">
+            <h4>Update State</h4>
+            <form method="post" action="/Admin/u_state/{{state.StateId}}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="text" class="col-12 col-form-label">State Id</label> 
+                    <div class="col-12">
+                        <input id="StateId" name="StateId" class="form-control here slug-title" placeholder="Add State Id" disabled value="{{state.StateId}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">State Name</label> 
+                    <div class="col-12">
+                        <input id="StateName" type="text" name="StateName" class="form-control here set-slug" placeholder="Add New State" value="{{state.StateName}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

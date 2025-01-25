@@ -1,0 +1,32 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Update Category {% endblock %}
+{% block body %}
+<div class="ec-cat-list card card-default mb-24px">
+    <div class="card-body">
+        <div class="ec-cat-form">
+            <h4>Update Category</h4>
+            <form method="post" action="/Admin/u_cat/{{cat.CatId}}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="text" class="col-12 col-form-label" disabled>Category Id</label> 
+                    <div class="col-12">
+                        <input id="text" name="CatId" class="form-control here slug-title" type="Add Area Id" disabled value="{{cat.CatId}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-12 col-form-label">Category Name</label> 
+                    <div class="col-12">
+                        <input id="slug" name="CatName" class="form-control here set-slug" type="Add New State">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

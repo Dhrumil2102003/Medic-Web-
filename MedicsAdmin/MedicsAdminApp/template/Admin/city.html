@@ -1,0 +1,128 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} City {% endblock %}
+{% block Others %}active{% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">	
+				<div>
+					<h1>City</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>City</p>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#modal-add-contact"> Add New City
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-lg-4" hidden>
+					<div class="ec-cat-list card card-default mb-24px">
+						<div class="card-body">
+							<div class="ec-cat-form">
+								<h4>Add New City</h4>
+								<form method="post">
+									<div class="form-group row">
+										<label for="text" class="col-12 col-form-label">City Id</label> 
+										<div class="col-12">
+											<input id="text" name="text" class="form-control here slug-title" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="slug" class="col-12 col-form-label">City Name</label> 
+										<div class="col-12">
+											<input id="slug" name="slug" class="form-control here set-slug" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-12 col-form-label">State Name</label> 
+										<div class="col-12">
+											<textarea id="fulldescription" name="fulldescription" cols="40" rows="4" class="form-control"></textarea>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-12">
+											<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-12 col-lg-12">
+					<div class="ec-cat-list card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table">
+									<thead>
+										<tr>
+											<th>City Id</th>
+											<th>CIty Name</th>
+											<th>State Name</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for cts in ct %}
+											<tr>
+												<td>{{cts.CityId}}</td>
+												<td>{{cts.CityName}}</td>
+												<td>{{cts.StateId.StateName}}</td>
+												<td><a href='/Admin/d_city/{{cts.CityId}}'>Delete &nbsp; |</a>&nbsp;
+													<a href="/Admin/u_city/{{cts.CityId}}">Update</a>
+												</td>											
+											</tr>  
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade modal-add-contact" id="modal-add-contact" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="ec-cat-list card card-default mb-24px">
+							<div class="card-body">
+								<div class="ec-cat-form">
+									<h4>Add New CIty</h4>
+									<form method="post" action="/Admin/i_city/">
+										{% csrf_token %}
+										<div class="form-group row">
+											<label for="slug" class="col-12 col-form-label">City Name</label> 
+											<div class="col-12">
+												<input id="slug" name="CityName" class="form-control here set-slug" type="Add New Area">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-12 col-form-label">State Name</label> 
+											<fieldset class="form-group">
+												<select class="form-select" id="state" name="StateId">
+													{% for data in st %}
+														<option value="{{data.StateId}}">{{data.StateName}}</option>
+													{% endfor %}
+												</select>
+											</fieldset>
+										</div> 
+										<div class="row">
+											<div class="col-12">
+												<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

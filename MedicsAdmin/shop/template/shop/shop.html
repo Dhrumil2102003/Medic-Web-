@@ -1,0 +1,268 @@
+{% extends 'shop/header.html' %}
+{% load static %}
+{% block title %} Shop {% endblock %}
+{% block body %}
+
+    <div class="ltn__utilize-overlay"></div>
+
+    <!-- PRODUCT DETAILS AREA START -->
+    <div class="ltn__product-area ltn__product-gutter mb-120 mt-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="ltn__shop-options">
+                        {% comment %} <ul>
+                            <li>
+                                <div class="ltn__grid-list-tab-menu ">
+                                    <div class="nav">
+                                        <a class="active show" data-bs-toggle="tab" href="{% static '#liton_product_grid' %}"><i class="fas fa-th-large"></i></a>
+                                        <a data-bs-toggle="tab" href="{% static '#liton_product_list' %}"><i class="fas fa-list"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                               <div class="showing-product-number text-right">
+                                    <span>Showing 1–12 of 18 results</span>
+                                </div> 
+                            </li>
+                            <li>
+                               <div class="short-by text-center">
+                                    <select class="nice-select">
+                                        <option>Default Sorting</option>
+                                        <option>Sort by popularity</option>
+                                        <option>Sort by new arrivals</option>
+                                        <option>Sort by price: low to high</option>
+                                        <option>Sort by price: high to low</option>
+                                    </select>
+                                </div> 
+                            </li>
+                        </ul> {% endcomment %}
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="liton_product_grid">
+                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                <div class="row">
+                                    <!-- ltn__product-item -->
+                                    {% for i in product %}
+                                    <div class="col-xl-4 col-sm-6 col-6">
+                                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                                            <div class="product-img">
+                                                <a href="/productDetails/{{i.ProductId}}"><img src="{{i.ProductImage.url}}" alt="#"></a>
+                                                {% comment %} {% if i.date %} {% endcomment %}
+                                                <div class="product-badge">
+                                                    <ul>
+                                                        {% if i.Trending == 1 %}
+                                                        <li class="sale-badge">Trending</li>
+                                                        {% elif i.Featured == 1 %}
+                                                        <li class="sale-badge">Featured</li>
+                                                        {% elif i.BestSeller == 1%}
+                                                        <li class="sale-badge">BestSeller</li>
+                                                        {%endif%}
+                                                    </ul>
+                                                </div>
+                                                <div class="product-hover-action">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/productDetails/{{i.ProductId}}" title="Quick View">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/cart/add/{{i.ProductId}}" title="Add to Cart" >
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-ratting">
+                                                    <ul>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="product-title"><a href="/productDetails/{{i.ProductId}}" title="{{i.ProductName}}">{{i.ProductName | truncatechars:30}}</a></h2>
+                                                <div class="product-price">
+                                                    <span>&#8377; {{i.ProductPrice}}</span>
+                                                    <del>&#8377; {{i.MRP}}</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  {% endfor %}
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ltn__pagination-area text-center">
+                        <div class="ltn__pagination">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">...</a></li>
+                                <li><a href="#">10</a></li>
+                                <li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-4">
+                    <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar mt-50">
+                        <!-- Category Widget -->
+                        <div class="widget ltn__menu-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+                            <ul>
+                                {%for i in sscat%}
+                                <li><a href="/shop/{{i.SubSubCatId}}">{{i.SubSubCatName}} <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                {%endfor%}
+                            </ul>
+                        </div>
+                        <!-- Price Filter Widget -->
+                        
+                        <!-- Top Rated Product Widget -->
+                        {% comment %}<div class="widget ltn__top-rated-product-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Top Rated Product</h4>
+                            <ul>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="/productDetails/"><img src="{% static 'img/product/1.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="/producDetails/">Mixel Solid Seat Cover</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="/productDdetails/"><img src="{% static 'img/product/2.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="/product/etails/">Thermometer Gun</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="/productDetails/"><img src="{% static 'img/product/3.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="/productDetails/">Coil Spring Conversion</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>{% endcomment %}
+                        <!-- Search Widget -->
+                        <!-- Tagcloud Widget -->
+                        {% comment %}<div class="widget ltn__tagcloud-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Popular Tags</h4>
+                            <ul>
+                                <li><a href="#">Body</a></li>
+                                <li><a href="#">Doctor</a></li>
+                                <li><a href="#">Drugs</a></li>
+                                <li><a href="#">Eye</a></li>
+                                <li><a href="#">Face</a></li>
+                                <li><a href="#">Hand</a></li>
+                                <li><a href="#">Mask</a></li>
+                                <li><a href="#">Medicine</a></li>
+                                <li><a href="#">Price</a></li>
+                                <li><a href="#">Sanitizer</a></li>
+                                <li><a href="#">Virus</a></li>
+                            </ul>
+                        </div>
+                        <!-- Size Widget -->
+                        <div class="widget ltn__tagcloud-widget ltn__size-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product Size</h4>
+                            <ul>
+                                <li><a href="#">S</a></li>
+                                <li><a href="#">M</a></li>
+                                <li><a href="#">L</a></li>
+                                <li><a href="#">XL</a></li>
+                                <li><a href="#">XXL</a></li>
+                            </ul>
+                        </div>
+                        <!-- Color Widget -->
+                        <div class="widget ltn__color-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product Color</h4>
+                            <ul>
+                                <li class="black"><a href="#"></a></li>
+                                <li class="white"><a href="#"></a></li>
+                                <li class="red"><a href="#"></a></li>
+                                <li class="silver"><a href="#"></a></li>
+                                <li class="gray"><a href="#"></a></li>
+                                <li class="maroon"><a href="#"></a></li>
+                                <li class="yellow"><a href="#"></a></li>
+                                <li class="olive"><a href="#"></a></li>
+                                <li class="lime"><a href="#"></a></li>
+                                <li class="green"><a href="#"></a></li>
+                                <li class="aqua"><a href="#"></a></li>
+                                <li class="teal"><a href="#"></a></li>
+                                <li class="blue"><a href="#"></a></li>
+                                <li class="navy"><a href="#"></a></li>
+                                <li class="fuchsia"><a href="#"></a></li>
+                                <li class="purple"><a href="#"></a></li>
+                                <li class="pink"><a href="#"></a></li>
+                                <li class="nude"><a href="#"></a></li>
+                                <li class="orange"><a href="#"></a></li>
+
+                                <li><a href="#" class="orange"></a></li>
+                                <li><a href="#" class="orange"></a></li>
+                            </ul>
+                        </div>{% endcomment %}
+                        <!-- Banner Widget -->
+                    </aside>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT DETAILS AREA END -->
+{% endblock %}

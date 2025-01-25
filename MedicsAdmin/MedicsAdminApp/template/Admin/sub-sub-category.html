@@ -1,0 +1,136 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Sub Sub category {% endblock %}
+{% block Categories %}active{% endblock %}
+{% block body %}
+
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">
+			<div>
+				<h1>Sub Sub Category</h1>
+				<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Sub Sub Category</p>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+				data-bs-target="#modal-add-contact"> Add New Sub Sub Category
+				</button>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-4 col-lg-12" hidden>
+					<div class="ec-cat-list card card-default mb-24px">
+						<div class="card-body">
+							<div class="ec-cat-form">
+								<h4>Add Sub Sub Category</h4>
+								<form method="post">{% csrf_token %}
+									<div class="form-group row">
+										<label for="text" class="col-12 col-form-label">Sub Sub category Id</label> 
+										<div class="col-12">
+											<input id="SubSubCatId" class="form-control here slug-title" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="slug" class="col-12 col-form-label"> Sub Sub Category Name</label> 
+										<div class="col-12">
+											<input id="SubSubCatName" name="slug" class="form-control here set-slug" type="text">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-12 col-form-label">Sub Category</label> 
+										<div class="col-12">
+											<select>
+												{% for SubSubC in subSubC %}
+													<option>
+														{{SubSubC.SubCatId}}
+													</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div> 									
+									<div class="row">
+										<div class="col-12">
+											<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+								</form method="post" action="/Admin/i_sscat/{{SubSubCty.SubSubCatId}}">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-12 col-lg-12">
+					<div class="ec-cat-list card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table">
+									<thead>
+										<tr>
+											<th>Number</th>
+											<th>Name</th>
+											<th>Sub Categories</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for SubSubCatS in SubSubCty %}
+											<tr>
+												<td>{{SubSubCatS.SubSubCatId}}</td>
+												<td>{{SubSubCatS.SubSubCatName}}</td>
+												<td>{{SubSubCatS.SubCatId.SubCatName}}</td>														
+												<td><a href='/Admin/d_sscat/{{SubSubCatS.SubSubCatId}}'>Delete &nbsp; |</a>&nbsp;
+													<a href='/Admin/u_sscat/{{SubSubCatS.SubSubCatId}}'>Update</a></td>	
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade modal-add-contact" id="modal-add-contact" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="ec-cat-list card card-default mb-24px">
+							<div class="card-body">
+								<div class="ec-cat-form">
+									<h4>Add Sub Sub Category</h4>
+									<form method="post" action="/Admin/i_sscat/{{SubSubCty.SubSubCatId}}">
+										{% csrf_token %}
+										<div class="form-group row">
+											<label for="slug" class="col-12 col-form-label"> Sub Sub Category Name</label> 
+											<div class="col-12">
+												<input id="SubSubCatName" name="SubSubCatName" class="form-control here set-slug" type="text">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-12 col-form-label">Sub Category</label> 
+											<div class="col-12">
+												<select name="SubCatId">
+													{% for SubC in SubCty %}
+														<option value="{{SubC.SubCatId}}">
+															{{SubC.SubCatName}}
+														</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div> 									
+										<div class="row">
+											<div class="col-12">
+												<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

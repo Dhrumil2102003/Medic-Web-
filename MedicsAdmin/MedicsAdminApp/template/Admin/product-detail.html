@@ -1,0 +1,113 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Product Details {% endblock %}
+{% block Products %}active{% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+				<div>
+					<h1>Product Detail</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+						<span><i class="mdi mdi-chevron-right"></i></span>Product
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-default">
+						<div class="card-header card-header-border-bottom">
+							<h2>Product Detail</h2>
+						</div>
+
+						<div class="card-body product-detail">
+							<div class="row">
+								<div class="col-xl-4 col-lg-6">
+									<div class="row">
+										<div class="single-pro-img">
+											<div class="single-product-scroll">
+												<div class="single-product-cover">
+													<div class="single-slide zoom-image-hover">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													{% comment %} <div class="single-slide zoom-image-hover">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide zoom-image-hover">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide zoom-image-hover">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide zoom-image-hover">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div> {% endcomment %}
+												</div>
+												{% comment %} <div class="single-nav-thumb">
+													<div class="single-slide">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+													<div class="single-slide">
+														<img class="img-responsive"
+															src="{{pro.ProductImage.url}}" alt="">
+													</div>
+												</div> {% endcomment %}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-5 col-lg-6">
+									<div class="row product-overview">
+										<div class="col-12">
+											<h5 class="product-title">{{pro.ProductName}}</h5>
+											{% comment %} <p class="product-rate">
+												<i class="mdi mdi-star is-rated"></i>
+												<i class="mdi mdi-star is-rated"></i>
+												<i class="mdi mdi-star is-rated"></i>
+												<i class="mdi mdi-star is-rated"></i>
+												<i class="mdi mdi-star"></i>
+											</p> {% endcomment %}
+											<br>
+											<p class="product-desc">{{pro.Description}}.</p>
+											<p class="product-price">{{pro.ProductPrice}}</p>
+											
+											<div class="product-stock">
+												<div class="stock">
+													<p class="title">Available</p>
+													<p class="text">{{pro.ProductQty}}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

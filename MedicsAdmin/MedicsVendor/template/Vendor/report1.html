@@ -1,0 +1,155 @@
+{% extends 'Vendor/header_footer.html' %}
+{% load static %}
+{% block title %}
+Report
+{% endblock title %}
+{% block report %}active{% endblock report %}
+{% block body %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+                    <h3>Store Table</h3>
+                    <p class="breadcrumbs"><span><a href="/Vendor/index/">Home</a></span>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Report (By Date)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header">Datatable</div>
+                <div class="card-body">
+                    <form method="post" action="/Vendor/report1/">
+                        {% csrf_token %}
+                        <select name="Store">
+                            {%for i in store %}
+                            <option value={{i.store.StoreId}}> {{i.store.StoreName}} </option>
+                            {%endfor%}
+                        </select>
+                        <div class="col-sm-12 md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Date From</label>
+                                <input type="date" min="{{date}}" placeholder="From"
+                                       class="form-control" name="start_date" id="book_date_time" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Date To</label>
+                                <input type="date" min="{{date}}" placeholder="To"
+                                       class="form-control" name="end_date" id="" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-end">
+                            <button class="btn btn-primary me-1 mb-1">Generate Report</button>
+                        </div>
+                    </form>
+                         <form class="mb-20">
+                            &emsp;<input class="btn btn-primary me-1 mb-1" type="button" onclick="generate()" value="Export To PDF" />
+                        </form>
+                        <button class=" print btn btn-sm btn-primary">
+                            <i class="mdi mdi-printer"></i> Print
+                        </button>
+                    <table class="content table table-striped" id="simple_table">
+                        <thead>
+                            <tr>
+								<th colspan="6">Order By Date</th>
+							</tr>
+                            <tr>
+                                <th>Order id</th>
+                                <th>Order Date</th>
+                                <th>User Address</th>
+                                <th>Order Amount</th>
+                                <th>User Name</th>
+                                <th>Store Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in order %}
+                                <tr>
+                                    <td>{{data.OrderId}}</td>
+                                    <td>{{data.OrderDate}}</td>
+                                    <td>{{data.UserId.Address}}</td>
+                                    <td>&#8377; {{data.Amount}}</td>
+                                    <td>{{data.UserId.UserName}}</td>
+                                    <td>{{data.StoreId.StoreName}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<style>
+    .mb-20{
+        margin-bottom: 20px;
+    }
+</style>
+<script type="text/javascript">
+    function printContent(el) {
+        var restorepage = document.body.innerHTML; // save original page html to variable
+        var printcontent = document.querySelector(el).innerHTML; // save content to be printed to variable
+        document.body.innerHTML = printcontent; // display only content to be printed in document body
+        window.print(); // print commands
+        document.body.innerHTML = restorepage; // restore original page content
+      }
+      
+      document.querySelector('.print').addEventListener('click', function() { // bind event to print button
+        printContent('.content'); // initial print function on selector for content to be printed
+      });
+
+
+      function generate() {
+        var doc = new jsPDF('p', 'pt', 'letter');
+        var htmlstring = '';
+        var tempVarToCheckPageHeight = 0;
+        var pageHeight = 0;
+        pageHeight = doc.internal.pageSize.height;
+        specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '#bypassme': function(element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 150,
+            bottom: 60,
+            left: 40,
+            right: 40,
+            width: 600
+        };
+        var y = 20;
+        doc.setLineWidth(2);
+        doc.text(200, y = y + 30, "Vehicle Report");
+        doc.autoTable({
+            html: '#simple_table',
+            startY: 70,
+            theme: 'grid',
+            columnStyles: {
+                0: {
+                    cellWidth: 180,
+                },
+                1: {
+                    cellWidth: 180,
+                },
+                2: {
+                    cellWidth: 180,
+                }
+            },
+            styles: {
+                minCellHeight: 40
+            }
+        })
+        doc.save('Report.pdf');
+    }
+
+</script>
+{% endblock %}

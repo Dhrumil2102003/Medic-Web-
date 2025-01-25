@@ -1,0 +1,198 @@
+{% extends 'Admin/header_footer.html' %}
+{%load mathfilters %}
+{% load static %}
+{% block title %} Invoice {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+				<h1>Invoice</h1>
+				<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Invoice
+				</p>
+			</div>
+			<div id="editor"></div>
+			<div class="btn-group">
+				{% comment %} <button  class="btn btn-sm btn-primary">
+					<i class=" download mdi mdi-content-save"></i> Save
+				</button> {% endcomment %}
+				<form class="mr-20px">
+					&emsp;<button class="btn btn-primary" type="button" onclick="generate()" value="">Export To PDF</button>
+				</form>
+				<button class="print btn btn-primary">
+					<i class="mdi mdi-printer"></i> Print
+				</button>
+			</div>
+			<div class=" invoice card invoice-wrapper border-radius border bg-white p-4">
+				<div class="d-flex justify-content-between">
+					<h3 class="text-dark font-weight-medium">Invoice {{order.OrderId}}</h3>
+					
+				</div>
+				<div class="row pt-5">
+					<div class="col-xl-3 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">From: </p>
+						<address>
+							<span>{{order.StoreId.StoreName}}</span>
+							<br>{{order.StoreId.StoreAddress}}
+							<br> <span>Email:</span> {{order.StoreId.VendorId.Email}}
+							<br> <span>Phone:</span> {{order.StoreId.StoreMobile}}
+						</address>
+					</div>
+					<div class="col-xl-3 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">To: </p>
+						<address>
+							<span>{{order.UserId.FirstName}} {{order.UserId.LastName}}</span>
+							<br> {{order.UserId.Address}} ,{{order.UserId.AreaId.AreaName}}<br>{{order.UserId.AreaId.CityId.CityName}}-{{order.UserId.AreaId.pinCode}}
+							<br> <span>Email</span>: {{order.UserId.Email}}
+							<br> <span>Phone:</span> {{order.UserId.Mobile}}
+						</address>
+					</div>
+					<div class="col-xl-4 disp-none"></div>
+					<div class="col-xl-2 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">Details</p>
+						<address>
+							<span>Invoice ID:</span>
+							<span class="text-dark">{{order.OrderId}}</span>
+							<br><span>Date :</span> {{order.OrderDate}}
+							{% comment %} <br> <span>VAT:</span> PL6541215450 {% endcomment %}
+						</address>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped mt-3 table-responsive table-responsive-large inv-tbl" id="simple_table"
+						style="width:100%">
+						<thead>
+							
+							<tr>
+								<th>#</th>
+								<th>Image</th>
+								<th>Item</th>
+								<th>Quantity</th>
+								<th>Unit_Cost</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{%for i in order.orderitem_set.all%}
+												<tr>
+													<td>{{forloop.counter}}</td>
+													<td><img class="product-img"
+															src="{{i.product.ProductImage.url}}" alt="" /></td>
+													<td><strong>{{i.product.ProductName}}</strong></td>
+													<td class="text-center">{{i.quantity}}</td>
+													<td class="text-center">&#8377; {{i.product.ProductPrice}}</td>
+													<td class="text-right">&#8377; {{i.quantity|mul:i.product.ProductPrice}}</td>
+												</tr>
+												{%endfor%}
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="row justify-content-end inc-total">
+					<div class="col-lg-3 col-xl-3 col-xl-3 ml-sm-auto">
+						<ul class="list-unstyled mt-3">
+							<li class="mid pb-3 text-dark"> Subtotal
+								<span class="d-inline-block float-right text-default">&#8377; {{order.Amount|sub:50}}</span>
+							</li>
+							<li class="mid pb-3 text-dark">Delivery Charges
+								<span class="d-inline-block float-right text-default">&#8377; 50</span>
+							</li>
+							<li class="pb-3 text-dark">Total
+								<span class="d-inline-block float-right">&#8377; {{order.Amount}}</span>
+							</li>
+						</ul>
+						{% comment %} <a href="javascript:void(0)" class="btn btn-block mt-2 btn-primary btn-pill"> Procced to
+							Payment</a> {% endcomment %}
+					</div>
+				</div>
+			</div>
+		</div> <!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+	<style>
+		.btn-group, .btn-group-vertical {
+			position: relative;
+			display: -webkit-inline-box;
+			display: -ms-inline-flexbox;
+			display: inline-flex;
+			margin-bottom: 20px;
+			vertical-align: middle;
+		}
+		.mr-20px{
+			margin-right: 20px;
+		}
+		button.print.btn.btn-primary {
+			border-radius: 15px;
+		}
+	</style>
+	<script type="text/javascript">
+		function printContent(el) {
+			var restorepage = document.body.innerHTML; // save original page html to variable
+			var printcontent = document.querySelector(el).innerHTML; // save content to be printed to variable
+			document.body.innerHTML = printcontent; // display only content to be printed in document body
+			window.print(); // print commands
+			document.body.innerHTML = restorepage; // restore original page content
+		  }
+		  
+		  document.querySelector('.print').addEventListener('click', function() { // bind event to print button
+			printContent('.invoice'); // initial print function on selector for content to be printed
+		  });
+
+
+		  function generate() {
+			var doc = new jsPDF('p', 'pt', 'letter');
+			var htmlstring = '';
+			var tempVarToCheckPageHeight = 0;
+			var pageHeight = 0;
+			pageHeight = doc.internal.pageSize.height;
+			specialElementHandlers = {
+				// element with id of "bypass" - jQuery style selector
+				'#bypassme': function(element, renderer) {
+					// true = "handled elsewhere, bypass text extraction"
+					return true
+				}
+			};
+			margins = {
+				top: 150,
+				bottom: 60,
+				left: 40,
+				right: 40,
+				width: 600
+			};
+			var y = 20;
+			doc.setLineWidth(2);
+			doc.text(200, y = y + 30, "Vehicle Report");
+			doc.autoTable({
+				html: '#simple_table',
+				startY: 70,
+				theme: 'grid',
+				columnStyles: {
+					0: {
+						cellWidth: 50,
+					},
+					1: {
+						cellWidth: 50,
+					},
+					2: {
+						cellWidth: 50,
+					},
+					3: {
+						cellWidth: 50,
+					},
+					4: {
+						cellWidth: 50,
+					},
+					5: {
+						cellWidth: 50,
+					}
+				},
+				styles: {
+					minCellHeight: 40
+				}
+			})
+			doc.save('Report.pdf');
+		}
+
+	</script>
+{% endblock %}

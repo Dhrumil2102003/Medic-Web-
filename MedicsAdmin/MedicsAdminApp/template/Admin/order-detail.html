@@ -1,0 +1,120 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block title %} Order Details {% endblock %}
+{% block Orders %} active {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+				<div class="d-flex flex-column">
+					<h1>Order Detail</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+						<span><i class="mdi mdi-chevron-right"></i></span>Orders
+					</p>
+				</div>
+				<a href="/Admin/invoice/{{order.OrderId}}"><button class="btn btn-primary">Generate Invoice</button></a>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="ec-odr-dtl card card-default">
+						<div class="card-header card-header-border-bottom d-flex justify-content-between">
+							<h2 class="ec-odr">Order Detail<br>
+								<span class="small">Order ID: {{order.OrderId}}</span>
+							</h2>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-xl-3 col-lg-6">
+									<address class="info-grid">
+										<div class="info-title"><strong>Customer:</strong></div><br>
+										<div class="info-content">
+											{{order.UserId.UserName}}.<br>
+											{{order.UserId.Address}}<br>
+											{{order.UserId.AreaId.AreaName}}<br>
+											<abbr title="Phone">Contact:</abbr> {{order.UserId.Mobile}}
+										</div>
+									</address>
+								</div>
+								<div class="col-xl-3 col-lg-6">
+									<address class="info-grid">
+										<div class="info-title"><strong>Shipped From:</strong></div><br>
+										<div class="info-content">
+											{{order.StoreId.StoreName}}<br>
+											{{order.StoreId.StoreAddress}}<br>
+											<abbr title="Phone">Contact:</abbr> {{order.StoreId.StoreMobile}}
+										</div>
+									</address>
+								</div>
+								<div class="col-xl-3 col-lg-6">
+									<address class="info-grid">
+										<div class="info-title"><strong>Payment Method:</strong></div><br>
+										<div class="info-content">
+											{{pay.PaymentTypeId.PaymentType}}
+										</div>
+									</address>
+								</div>
+								<div class="col-xl-3 col-lg-6">
+									<address class="info-grid">
+										<div class="info-title"><strong>Order Date:</strong></div><br>
+										<div class="info-content">
+											{{order.OrderDate}}
+										</div>
+									</address>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<h3 class="tbl-title">PRODUCT SUMMARY</h3>
+									<div class="table-responsive">
+										<table class="table table-striped o-tbl">
+											<thead>
+												<tr class="line">
+													<td><strong>#</strong></td>
+													<td class="text-center"><strong>IMAGE</strong></td>
+													<td class="text-center"><strong>PRODUCT</strong></td>
+													<td class="text-center"><strong>PRICE/UNIT</strong></td>
+													<td class="text-right"><strong>QUANTITY</strong></td>
+													<td class="text-right"><strong>SUBTOTAL</strong></td>
+												</tr>
+											</thead>
+											<tbody>
+												{%for i in order.orderitem_set.all%}
+												<tr>
+													<td>{{forloop.counter}}</td>
+													<td><img class="product-img"
+															src="{{i.product.ProductImage.url}}" alt="" /></td>
+													<td><strong>{{i.product.ProductName}}</strong></td>
+													<td class="text-center">{{i.quantity}}</td>
+													<td class="text-center">&#8377; {{i.product.ProductPrice}}</td>
+													<td class="text-right">&#8377; {{i.quantity|mul:i.product.ProductPrice}}</td>
+												</tr>
+												{%endfor%}
+											</tbody>
+										</table>
+										<div class="d-flex justify-content-end">
+											<p class='ml-50'> OrderTotal: </p>
+											<p class="ml-50 mr-10"> &#8377;{{order.Amount}} </p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+	<style>
+		.ml-50{
+			margin-left: 50px;
+			color: #8a909d !important;
+		}
+		.mr-10{
+			margin-right: 10px;
+		}
+	</style>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'shop/header.html' %}
+{% load static %}
+{% load cart_tag %}
+{% block title %} Shop {% endblock %}
+{% block body %}
+    <div class="liton__shoping-cart-area mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mt-50">
+                    <div class="shoping-cart-inner">
+                        <div class="shoping-cart-table table-responsive">
+                            <h1> OrderPlaced SuccessFully</h1>
+                            <button class="btn btn-primary"><a href="/orderDetails/{{ord.OrderId}}"> View Order Details </a></button>
+                            <button class="btn btn-primary"><a href="/"> Back to home </a></button>
+                            {% comment %} <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td class="text-start"><b>Product Name</b></td>
+                                        <td class="text-start"><b>Amount</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    {%for key,value in request.session.tempcart.items%}
+                                    <tr>
+                                        <td>{{value.name}}  &nbsp;&nbsp;&nbsp; <b> x {{value.quantity}} </b> </td>
+                                        <td>&#8377; {{value.price|multiply:value.quantity}}</td>
+                                    </tr>
+                                    {% endfor%}
+                                    <tr>
+                                        <td class=" mr-10"><b>Order Total :</b></td>
+                                        <td><b>&#8377; {{ord.Amount}}</b></td>
+                                    </tr>
+                                </tbody>
+                            </table> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        button.btn.btn-primary {
+            background-color: #0a9a73;
+            border-radius: 15px;
+            border: none;
+        }
+        a:hover {
+            color: rgb(255, 255, 255);
+            background-color: #0a9a73;
+        }
+    </style>
+{% endblock %}

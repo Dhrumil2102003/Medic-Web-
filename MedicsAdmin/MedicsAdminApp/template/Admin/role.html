@@ -1,0 +1,144 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Role {% endblock %}
+{% block Others %} active {% endblock %}
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">	
+				<div>
+					<h1>Role</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+					<span><i class="mdi mdi-chevron-right"></i></span>Role</p>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#modal-add-contact"> Add New Role
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-lg-4" hidden>
+					<div class="ec-cat-list card card-default mb-24px">
+						<div class="card-body">
+							<div class="ec-cat-form">
+								<h4>Add New Role</h4>
+
+								<form method="post">
+
+									<div class="form-group row">
+										<label for="text" class="col-12 col-form-label">Role Id</label> 
+										<div class="col-12">
+											<input id="text" name="RoleId" class="form-control here slug-title" type="text">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="slug" class="col-12 col-form-label">Role Name</label> 
+										<div class="col-12">
+											<input id="slug" name="RoleName" class="form-control here set-slug" type="text">
+										</div>
+									</div>
+
+									<!-- <div class="form-group row">
+										<label class="col-12 col-form-label">State Name</label> 
+										<div class="col-12">
+											<textarea id="fulldescription" name="fulldescription" cols="40" rows="4" class="form-control"></textarea>
+										</div>
+									</div>  -->
+
+									<div class="row">
+										<div class="col-12">
+											<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-12 col-lg-12">
+					<div class="ec-cat-list card card-default">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="responsive-data-table" class="table">
+
+									<thead>
+										<tr>
+											<th>Role Id</th>
+											<th>Role Name</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+									<tbody>
+				{% for cts in rl %}
+
+				<tr>
+					<td>{{cts.RoleId}}</td>
+					<td>{{cts.RoleName}}</td> 
+					<td><a href='/Admin/d_role/{{cts.RoleId}}'>Delete&nbsp;&nbsp;&nbsp;|</a>&nbsp;
+						<a href='/Admin/u_role/{{cts.RoleId}}'>Update</a></td>      
+					</tr>     
+					
+				{% endfor %}
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade modal-add-contact" id="modal-add-contact" tabindex="-1" class="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" class="document">
+					<div class="modal-content">
+						<div class="ec-cat-list card card-default mb-24px">
+							<div class="card-body">
+								<div class="ec-cat-form">
+									<h4>Add New Role</h4>
+
+									<form method="post" action="/Admin/i_role/">
+										{% csrf_token %}
+										{% comment %} <div class="form-group row">
+											<label for="text" class="col-12 col-form-label">Role Id</label> 
+											<div class="col-12">
+												<input id="text" name="RoleId" class="form-control here slug-title" type="Add Area Id">
+											</div>
+										</div> {% endcomment %}
+
+										<div class="form-group row">
+											<label for="slug" class="col-12 col-form-label">Role Name</label> 
+											<div class="col-12">
+												<input id="slug" name="RoleName" class="form-control here set-slug" type="Add New Area">
+											</div>
+										</div>
+
+										<!-- <div class="form-group row">
+											<label class="col-12 col-form-label">State Name</label> 
+											<div class="col-12">
+												<input id="text" name="text" class="form-control here slug-title" type="Add State Name">
+											</div>
+										</div>  -->
+
+										<div class="row">
+											<div class="col-12">
+												<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+											</div>
+										</div>
+
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'Admin/header_footer.html' %}
+{% load static %}
+{% block title %} Admin Profile {% endblock %}
+
+{% block body %}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-contacts">
+				<div>
+					<h1>Admin Profile</h1>
+					<p class="breadcrumbs"><span><a href="/Admin/index/">Home</a></span>
+						<span><i class="mdi mdi-chevron-right"></i></span>Admin Profile
+					</p>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#modal-add-contact">Edit
+					</button>
+				</div>
+			</div>
+			<div class="card bg-white profile-content">
+				<div class="row justify-content-left">
+					<div class="col-lg-8 col-xl-3">
+						<div class="profile-content-left profile-left-spacing">
+							<div class="text-center widget-profile px-0 border-0">
+								<div class="card-img mx-auto rounded-circle">
+									<img src="{{ad.UserProfile.url}}" alt="user image">
+								</div>
+								<div class="card-body">
+									<h4 class="py-2 text-dark">{{ad.UserName}}</h4>
+									<p>{{ad.Email}}</p>
+								</div>
+							</div>
+							<div class="d-flex justify-content-evenly ">
+								<div class="text-center pb-4">
+									<h6 class="text-dark pb-2">{{order}}</h6>
+									<p>Bought</p>
+								</div>
+
+								<div class="text-center pb-4">
+									<h6 class="text-dark pb-2">32</h6>
+									<p>Wish List</p>
+								</div>
+
+								<div class="text-center pb-4">
+									<h6 class="text-dark pb-2">1150</h6>
+									<p>Following</p>
+								</div>
+							</div>
+							<hr class="w-555px">
+							<div class="contact-info pt-4">
+								<h5 class="text-dark">Contact Information</h5>
+								<p class="text-dark font-weight-medium pt-24px mb-2">Email address</p>
+								<p>{{ad.Email}}</p>
+								<p class="text-dark font-weight-medium pt-24px mb-2">Phone Number</p>
+								<p>{{ad.Mobile}}</p>
+								<p class="text-dark font-weight-medium pt-24px mb-2">Birthday</p>
+								<p>{{ad.DOB}}</p>
+								<p class="text-dark font-weight-medium pt-24px mb-2">Gender</p>
+								<p>{{ad.Gender}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade modal-add-contact" id="modal-add-contact" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="ec-cat-list card card-default mb-24px">
+									<div class="card-body">
+										<div class="ec-cat-form">
+											<form method="post" action="/Admin/u_profile/{{ad.UserId}}"  enctype="multipart/form-data">
+												{%csrf_token%}
+												<div class="form-group row mb-6">
+													<label for="UserProfile"
+														class="col-sm-4 col-lg-2 col-form-label">User Image</label>
+														<div class="col-sm-8 col-lg-10">
+														<div class="custom-file mb-1">
+															<input type="file" class="custom-file-input"
+																id="UserProfile" name="UserProfile" required>
+															<label class="custom-file-label" for="coverImage">Choose
+																file...</label>
+															<div class="invalid-feedback">Example invalid custom
+																file feedback</div>
+														</div>
+													</div> 
+												</div>
+	
+												<div class="row mb-2">
+													<div class="col-lg-6">
+														<div class="form-group">
+															<label for="firstName">First name</label>
+															<input type="text" class="form-control" id="FirstName"
+																name="FirstName">
+														</div>
+													</div>
+	
+													<div class="col-lg-6">
+														<div class="form-group">
+															<label for="lastName">Last name</label>
+															<input type="text" class="form-control" id="LastName"
+																name="LastName">
+														</div>
+													</div>
+												</div>
+	
+												<div class="form-group mb-4">
+													<label for="userName">User name</label>
+													<input type="text" class="form-control" id="UserName"
+														name="UserName">
+												</div>
+	
+												<div class="form-group mb-4">
+													<label for="email">Email</label>
+													<input type="email" class="form-control" id="Email"
+														name="Email">
+												</div>
+	
+												<div class="form-group mb-4">
+													<label for="oldPassword">Mobile</label>
+													<input type="text" class="form-control" id="Mobile" name="Mobile">
+												</div>
+	
+												<div class="d-flex justify-content-end mt-5">
+													<button type="submit"
+														class="btn btn-primary mb-2 btn-pill">Update
+														Profile</button>
+												</div>
+											</form>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->		
+	<style>
+		.profile-content .profile-left-spacing {
+			padding: 40px 0 24px 24px;
+		}
+		.card.bg-white.profile-content {
+			border-radius: 15px;
+			-webkit-box-shadow: 0 0 10px 0 rgb(0 0 0 / 3%);
+			box-shadow: 0 0 10px 0 rgb(0 0 0 / 3%);
+			width:50% !important;
+			margin: 0 auto !important;
+		}
+		.col-lg-8.col-xl-3{
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 auto;
+			flex: 0 0 auto;
+			width: 100% !important;
+		}
+		.widget-profile .card-img {
+			width: 200px !important;
+			height: 200px !important;
+		}
+		.widget-profile .card-img img {
+			width: 100%;
+			height: 100%;
+		}
+		.w-555px{
+			width: 555px;
+			height: 3px;
+		}
+	</style>
+{% endblock %}

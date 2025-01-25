@@ -1,0 +1,146 @@
+{% extends 'shop/header.html' %}
+{% load static %}
+{% block title %} Invoice {% endblock %}
+{% block body %}
+{%load cart_tag%}
+	<!-- CONTENT WRAPPER -->
+	<div class="ec-content-wrapper">
+		<div class="content">
+			<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+				<h1>Invoice</h1>
+			</div>
+			<div class="card invoice-wrapper border-radius border bg-white p-4">
+				<div class="d-flex justify-content-between">
+					<h3 class="text-dark font-weight-medium">Invoice {{order.OrderId}}</h3>
+					<div class="btn-group">
+						<button class="btn btn-sm btn-primary pdf-btn">Save</button>
+						<button class="print btn btn-sm btn-primary">Print</button>
+					</div>
+				</div>
+				<div class="row pt-5">
+					<div class="col-xl-3 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">From</p>
+						<address>
+							<span>Medics</span>
+							<br> {{order.StoreId.Address}}
+							<br> <span>Email:</span> {{order.StoreId.VendorId.Email}}
+							<br> <span>Phone:</span> {{order.StoreId.StoreMobile}}
+						</address>
+					</div>
+					<div class="col-xl-3 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">To</p>
+						<address>
+							<span>{{user.FirstName}} {{user.LastName}}</span>
+							<br> {{user.Address}}
+							<br> <span>Email</span>: {{user.Email}}
+							<br> <span>Phone:</span> {{user.Mobile}}
+						</address>
+					</div>
+					<div class="col-xl-4 disp-none"></div>
+					<div class="col-xl-2 col-lg-4 col-sm-6">
+						<p class="text-dark mb-2">Details</p>
+						<address>
+							<span>Invoice ID:</span>
+							<span class="text-dark">#2365546</span>
+							<br><span>Date :</span>{{order.OrderDate}}
+							<br> <span>VAT:</span> PL6541215450
+						</address>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table mt-3 table-striped table-responsive table-responsive-large inv-tbl"
+						style="width:100%">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Image</th>
+								<th>Item</th>
+								<th>Quantity</th>
+								<th>Unit_Cost</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for items in oitems %}
+							<tr>
+								<td>{{forloop.counter}}</td>
+								<td><img class="invoice-item-img" src="{{items.product.ProductImage.url}}" alt="product-image" /></td>
+								<td>{{items.product.ProductName}}</td>
+								<td>{{items.quantity}}</td>
+								<td>&#8377; {{items.product.ProductPrice}}</td>
+								{%comment%}<td>{{items.product.Price | multiply:items.quantity}}</td>{%endcomment%}
+							</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+				</div>
+				<div class="row justify-content-end inc-total">
+					<div class="col-lg-3 col-xl-3 col-xl-3 ml-sm-auto d-flex justify-content-evenly">
+						<ul class="list-unstyled mt-3">
+							<li class="mid text-dark">Subtotal</li>
+							<li class="mid text-dark">Vat (10%)</li>
+							<li class="text-dark">Total</li>
+						</ul>
+						<ul class="list-unstyled mt-3 text-end">
+							<li class="mid text-dark"> Subtotal</li>
+							<li class="mid text-dark">50</li>
+							<li class="text-dark">&#8377; {{order.Amount}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div> <!-- End Content -->
+	</div> 
+	<!-- End Content Wrapper -->
+	<style>
+		.breadcrumb-wrapper.breadcrumb-wrapper-2 {
+			padding: 10px 24px;
+		}
+		.breadcrumb-wrapper.breadcrumb-wrapper-2 h1 {
+			margin: 0;
+		}
+		button.btn.btn-sm.btn-primary {
+			background-color: #0a9373;
+			border-radius: 15px !important;
+			padding: 10px 50px;
+		}
+		img.invoice-item-img {
+			max-width: 100px;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.print').click(function() {
+				// create a new window to display the printable version of the table
+				var printWindow = window.open('', 'Print');
+				// create a new HTML string with the printable version of the table
+				var html = '<html><head><title>Printable Table</title>';
+				html += '<style>table { border-collapse: collapse; width: 100%; }';
+				html += 'th, td { text-align: left; padding: 8px; }';
+				html += 'th { background-color: #f2f2f2; }</style>';
+				html += '</head><body><table>' + $('.table-responsive').html() + '</table></body></html>';
+				// write the HTML string to the new window and print it
+				printWindow.document.write(html);
+				printWindow.document.close();
+				printWindow.print();
+			});
+			$('.pdf-btn').click(function() {
+				// create a new jsPDF instance
+				var doc = new jsPDF();
+
+				// use html2canvas to capture the table as an image
+				html2canvas(document.querySelector(".content")).then(canvas => {
+				// add the image to the PDF document
+				doc.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 0);
+
+				// save the PDF document
+				doc.save('table.pdf');
+				});
+			});
+		})
+	</script>
+{% endblock %}

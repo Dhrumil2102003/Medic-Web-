@@ -1,0 +1,198 @@
+{% extends 'Vendor/header_footer.html' %}
+{% load static %}
+{% block title %} Product Details {% endblock %}
+{% block Products %}active{% endblock %}
+{% block body %}
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+						<div>
+							<h1>Product Detail</h1>
+							<p class="breadcrumbs"><span><a href="/Vendor/index/">Home</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Product
+							</p>
+						</div>
+						<div>
+							<a href="/Vendor/u_pro/{{pro.ProductId}}" class="btn btn-primary"> Edit
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-header card-header-border-bottom">
+									<h2>Product Detail</h2>
+								</div>
+
+								<div class="card-body product-detail">
+									<div class="row">
+										<div class="col-xl-4 col-lg-6">
+											<div class="row">
+												<div class="single-pro-img">
+													<div class="single-product-scroll">
+														<div class="single-product-cover">
+															<div class="single-slide zoom-image-hover">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide zoom-image-hover">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide zoom-image-hover">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide zoom-image-hover">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide zoom-image-hover">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+														</div>
+														<div class="single-nav-thumb">
+															<div class="single-slide">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+															<div class="single-slide">
+																<img class="img-responsive"
+																	src="{{pro.ProductImage.url}}" alt="">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-5 col-lg-6">
+											<div class="row product-overview">
+												<div class="col-12">
+													<h5 class="product-title">{{pro.ProductName}}</h5>
+													<p class="product-rate">
+														<i class="mdi mdi-star is-rated"></i>
+														<i class="mdi mdi-star is-rated"></i>
+														<i class="mdi mdi-star is-rated"></i>
+														<i class="mdi mdi-star is-rated"></i>
+														<i class="mdi mdi-star"></i>
+													</p>
+													<p class="product-desc">{{pro.Description}}.</p>
+													{% comment %} <p class="product-desc">Lorem Ipsum is simply dummy text of the
+														printing and typesetting industry. Lorem Ipsum has been the
+														industry's standard dummy text ever since the 1990. Lorem Ipsum
+														is simply dummy text of the printing and typesetting industry.
+													</p> {% endcomment %}
+													{% comment %} <div class="ec-ofr">
+														<h6>Available offers</h6>
+														<ul>
+															<li><b>Special Price :</b> Get extra 16% off (price
+																inclusive of discount) <a href="#">T&C</a> </li>
+															<li><b>Bank Offer :</b> 10% off on XYZ Bank Cards, up to
+																$12. On orders of $200 and above <a href="#">T&C</a>
+															</li>
+															<li><b>Bank Offer :</b> 5% Unlimited Cashback on medics XYZ
+																Bank Credit Card <a href="#">T&C</a></li>
+															<li><b>Bank Offer :</b> Flat $50 off on first medics Pay Later
+																order of $200 and above <a href="#">T&C</a></li>
+														</ul>
+													</div> {% endcomment %}
+													<p class="product-price">{{pro.ProductPrice}}</p>
+													{% comment %} <p class="product-sku">SKU#: WH12</p>
+													<ul class="product-size">
+														<li class="size"><span>S</span></li>
+														<li class="size"><span>M</span></li>
+														<li class="size"><span>L</span></li>
+														<li class="size"><span>XL</span></li>
+													</ul>
+													<ul class="product-color">
+														<li class="color"><span
+																style="background-color:#90cdf7;"></span></li>
+														<li class="color"><span
+																style="background-color:#ff3b66;"></span></li>
+														<li class="color"><span
+																style="background-color:#ffc476;"></span></li>
+														<li class="color"><span
+																style="background-color:#1af0ba;"></span></li>
+														<li class="color"><span
+																style="background-color:#f887d6;"></span></li>
+													</ul> {% endcomment %}
+
+													<div class="product-stock">
+														<div class="stock">
+															<p class="title">Available</p>
+															<p class="text">{{pro.ProductQty}}</p>
+														</div>
+														{% comment %}
+															<div class="stock">
+																<p class="title">Pending</p>
+																<p class="text">50</p>
+															</div>
+															<div class="stock">
+																<p class="title">InOrder</p>
+																<p class="text">20</p>
+															</div>
+														{% endcomment %}
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-12 u-card">
+											<div class="card card-default seller-card">
+												<div class="card-body text-center">
+													<a href="javascript:0" class="text-secondary d-inline-block">
+														<div class="image mb-3">
+															<img src="{{pro.StoreId.VendorId.Profile.url}}"
+																class="img-fluid rounded-circle" alt="Avatar Image">
+														</div>
+
+														<h5 class="text-dark">{{pro.StoreId.VendorId.Name}}</h5>
+														{% comment %} <p class="product-rate">
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star is-rated"></i>
+															<i class="mdi mdi-star"></i>
+														</p> {% endcomment %}
+
+														<ul class="list-unstyled">
+															<li class="d-flex mb-1">
+																<i class="mdi mdi-map mr-1"></i>
+																<span>{{pro.StoreId.StoreAddress}}</span>
+															</li>
+															<li class="d-flex mb-1">
+																<i class="mdi mdi-email mr-1"></i>
+																<span>{{pro.StoreId.VendorId.Email}}</span>
+															</li>
+															<li class="d-flex">
+																<i class="mdi mdi-whatsapp mr-1"></i>
+																<span>{{pro.StoreId.VendorId.Mobile}}</span>
+															</li>
+														</ul>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+{% endblock %}

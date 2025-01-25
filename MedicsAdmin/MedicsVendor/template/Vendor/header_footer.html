@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Medics">
+
+	<title> {% block title %} {% endblock %} </title>
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}">
+	<link rel="preconnect" href="{% static 'https://fonts.gstatic.com' %}" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<!-- For Slick Slider  -->
+	<link rel="stylesheet" type="text/css" href="{% static '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' %}"/>
+
+	<!--<link href="{% static 'https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css' %}" rel="stylesheet" />-->
+	<link href="{% static 'assets/css/materialdesignicons.min.css' %}" rel="stylesheet" />
+
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="{% static 'assets/plugins/daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+	<link href="{% static 'assets/plugins/simplebar/simplebar.css' %}" rel="stylesheet" />
+
+	<!-- medics CSS -->
+	<link id="medics-css" href="{% static 'assets/css/medics.css' %}" rel="stylesheet" />
+
+	<!-- FAVICON -->
+	<link href="{% static 'assets/img/logo/Medic-logo1.png' %}" rel="shortcut icon" />
+	<style>
+		.navbar .dropdown-menu {
+    width: 300px;
+		}
+	</style>
+
+</head>
+
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-light" id="body">
+	<header class="ec-main-header" id="header">
+		<nav class="navbar navbar-static-top navbar-expand-lg">
+			<!-- Sidebar toggle button -->
+			<button id="sidebar-toggler" class="sidebar-toggle"></button>
+			<!-- navbar right -->
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+					<!-- User Account -->
+					<li class="dropdown user-menu">
+						<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown"
+							aria-expanded="true">
+							<img src="{{ad.Profile.url}}" class="user-image" alt="User Image" />
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
+							<!-- User image -->
+							<li class="dropdown-header">
+								<img src="{{ad.Profile.url}}" class="img-circle" alt="User Image" />
+							 <div class="d-inline-block">
+									{{ad.Name}} <small class="pt-1">{{ad.Email}}</small>
+								</div> 
+							</li>
+							<li>
+								<a href="/Vendor/userProfile/">
+									<i class="mdi mdi-account"></i> My Profile
+								</a>
+							</li>
+							<li class="dropdown-footer">
+								<a href="/Vendor/logout/"> <i class="mdi mdi-logout"></i> Log Out </a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!--  WRAPPER  -->
+	<div class="wrapper">
+		
+		<!-- LEFT MAIN SIDEBAR -->
+		<div class="ec-left-sidebar ec-bg-sidebar">
+			<div id="sidebar" class="sidebar ec-sidebar-footer">
+
+				<div class="ec-brand">
+					<a href="/Vendor/index/" title="Medics">
+						<img class="ec-brand-icon" src="{% static 'assets/img/logo/Medics-logo1.png' %}" alt="" />
+						<span class="ec-brand-name text-truncate">Medics</span>
+					</a>
+				</div>
+
+				<!-- begin sidebar scrollbar -->
+				<div class="ec-navigation" data-simplebar>
+					<!-- sidebar menu -->
+					<ul class="nav sidebar-inner" id="sidebar-menu">
+						<div class="justify-content-center">	
+							{% comment %} <div>
+								<h1 style=" font-size: large ; text-align: center; text-transform:uppercase; color: darkcyan;"> Vendor  </h1>
+							
+							</div> {% endcomment %}
+						</div>
+						
+						<!-- Dashboard -->
+						<li class="has-sub {% block index %}{% endblock %}">
+							<a class="sidenav-item-link" href="/Vendor/index/">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Dashboard</span>
+							</a>
+							<hr>
+						</li>
+
+						<!-- Products -->
+						<li class="has-sub {% block Products %}{% endblock %}">
+							<a class="sidenav-item-link" href="javascript:void(0)">
+								<i class="mdi mdi-palette-advanced"></i>
+								<span class="nav-text">Products</span> <b class="caret"></b>
+							</a>
+							<div class="collapse">
+								<ul class="sub-menu" id="products" data-parent="#sidebar-menu">
+									{% comment %} <li class="">
+										<a class="sidenav-item-link" href="/Vendor/productAdd/">
+											<span class="nav-text">Add Product</span>
+										</a>
+									</li> {% endcomment %}
+									<li class="">
+										<a class="sidenav-item-link" href="/Vendor/productList/">
+											<span class="nav-text">List Product</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!-- Orders -->
+						<li class="has-sub {% block Orders %}{% endblock %}">
+							<a class="sidenav-item-link" href="javascript:void(0)">
+								<i class="mdi mdi-cart"></i>
+								<span class="nav-text">Orders</span> <b class="caret"></b>
+							</a>
+							<div class="collapse">
+								<ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+									<li class="">
+										<a class="sidenav-item-link" href="/Vendor/orderHistory/">
+											<span class="nav-text">Order History</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!-- Reviews -->
+						<li class="has-sub {% block Reviews %}{% endblock %}">
+							<a class="sidenav-item-link" href="/Vendor/reviewList/">
+								<i class="mdi mdi-star-half"></i>
+								<span class="nav-text">Reviews</span>
+							</a>
+						</li>
+						<li class="has-sub {% block report %}{% endblock %}">
+							<a class="sidenav-item-link" href="javascript:void(0)">
+								<i class="mdi mdi-file-chart"></i>
+								<span class="nav-text">Generate Report</span> <b class="caret"></b>
+							</a>
+							<div class="collapse">
+								<ul class="sub-menu" id="authentication" data-parent="#sidebar-menu">
+									
+                                    <li class="has-sub">
+										<a href="/Vendor/report1/">Report (By Date)</a>
+									</li>
+									<li class="has-sub">
+										<a href="/Vendor/report2/">Report (By Vendor)</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+
+						<!-- Authentication -->
+						<li class="has-sub">
+							<a class="sidenav-item-link" href="javascript:void(0)">
+								<i class="mdi mdi-login"></i>
+								<span class="nav-text">Authentication</span> <b class="caret"></b>
+							</a>
+							<div class="collapse">
+								<ul class="sub-menu" id="authentication" data-parent="#sidebar-menu">
+									<li class="">
+										<a href="/Vendor/login/">
+											<span class="nav-text">Sign In</span>
+										</a>
+									</li>
+									{% comment %} <li class="">
+										<a href="/Vendor/register/">
+											<span class="nav-text">Sign Up</span>
+										</a>
+									</li> {% endcomment %}
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<!--  PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<!-- <header class="ec-main-header" id="header">
+				<nav class="navbar navbar-static-top navbar-expand-lg"> -->
+					<!-- Sidebar toggle button -->
+					<!-- <button id="sidebar-toggler" class="sidebar-toggle"></button> -->
+					<!-- navbar right -->
+					<!-- <div class="navbar-right">
+						<ul class="nav navbar-nav"> -->
+							<!-- User Account -->
+							<!-- <li class="dropdown user-menu">
+								<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown"
+									aria-expanded="true">
+									<img src="{%static 'assets/img/Vendor1/u5.jpg' %}" class="user-image" alt="User Image" />
+								</button>
+								<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu"> -->
+									<!-- User image -->
+									<!-- <li class="dropdown-header">
+										<img src="{% static 'assets/img/Vendor1/u5.jpg' %}" class="img-circle" alt="User Image" />
+										<div class="d-inline-block">
+											{{venId.UserId}} <small class="pt-1">{{venId.Email}}</small>
+										</div>
+									</li>
+									<li>
+										<a href="/Vendor/userProfile/">
+											<i class="mdi mdi-account"></i> My Profile
+										</a>
+									</li>
+									<li class="dropdown-footer">
+										<a href="/Vendor/login/"> <i class="mdi mdi-logout"></i> Log Out </a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header> -->
+                {% block body %} {% endblock %}
+            
+
+	<!-- Common Javascript -->
+	<script src="{% static 'assets/plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+	<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'assets/plugins/simplebar/simplebar.min.js' %}"></script>
+	<script src="{% static 'assets/plugins/jquery-zoom/jquery.zoom.min.js' %}"></script>
+	<script src="{% static 'assets/plugins/slick/slick.min.js' %}"></script>
+
+	<!-- Chart -->
+	<script src="{% static 'assets/plugins/charts/Chart.min.js' %}"></script>
+	<script src="{% static 'assets/js/chart.js' %}"></script>
+
+	<!-- Google map chart -->
+	<script src="{% static 'assets/plugins/charts/google-map-loader.js' %}"></script>
+	<script src="{% static 'assets/plugins/charts/google-map.js' %}"></script>
+
+	<!-- Date Range Picker -->
+	<script src="{% static 'assets/plugins/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.js' %}"></script>
+	<script src="{% static 'assets/js/date-range.js' %}"></script>
+
+	<!-- Option Switcher -->
+	<script src="{% static 'assets/plugins/options-sidebar/optionswitcher.js' %}"></script>
+
+	<!-- medics Custom -->
+	<script src="{% static 'assets/js/medics.js' %}"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.7.0/parsley.min.js"></script>
+</body>
+
+</html>
