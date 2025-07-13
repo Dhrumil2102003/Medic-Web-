@@ -71,6 +71,4 @@ MedicsAdmin/
 - Make sure `media/` is writable for file uploads.
 - You may need to extract `media.rar` manually if it includes additional resources.
 
-## License
 
-MIT License
