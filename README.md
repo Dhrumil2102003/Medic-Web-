@@ -1,6 +1,6 @@
-# MedicsAdmin
+# Medics
 
-MedicsAdmin is a Django-based web application for managing medical product inventory, vendors, and shop transactions. It includes modules for admin management, vendor interaction, and e-commerce-like shop operations with integrated Paytm payment support.
+Medics is a Django-based web application for managing medical product inventory, vendors, and shop transactions. It includes modules for admin management, vendor interaction, and e-commerce-like shop operations with integrated Paytm payment support.
 
 ## Features
 
